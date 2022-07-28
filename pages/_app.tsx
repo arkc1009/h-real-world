@@ -1,15 +1,13 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { useEffect, useState } from "react";
+import Layout from "../components/common/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [temp] = useState();
-
-  useEffect(() => {
-    console.log(temp);
-  }, [temp]);
-
-  return <Component {...pageProps} />;
+  return (
+    <Layout>
+      <Component {...pageProps} />;
+    </Layout>
+  );
 }
 
 export default MyApp;
