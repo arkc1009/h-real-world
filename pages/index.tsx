@@ -1,11 +1,28 @@
-import { css } from '@emotion/css';
 import type { NextPage } from 'next';
-import tw from 'twin.macro';
+import tw, { css } from 'twin.macro';
+import Banner from '../components/Banner';
 
 const Home: NextPage = () => {
   return (
     <div css={tw`flex w-full min-h-screen flex-col items-center`}>
-      <section css={tw`w-full h-44 bg-[#5CB85C] shadow-inner`}></section>
+      <Banner>
+        <div css={tw`h-full flex flex-col justify-center items-center gap-4`}>
+          <h1
+            css={[
+              tw`font-extrabold text-6xl text-white`,
+              css`
+                text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+              `,
+            ]}
+          >
+            conduit
+          </h1>
+          <span css={tw`font-extralight text-2xl text-white`}>
+            A place to share your knowledge.
+          </span>
+        </div>
+      </Banner>
+      <section css={tw`flex flex-col items-center pt-8`}>contents!</section>
     </div>
   );
 };
