@@ -1,8 +1,9 @@
-import type { NextPage } from "next";
+import type { NextPage } from 'next';
+import tw from 'twin.macro';
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div css={tw`flex min-h-screen flex-col items-center justify-center py-2`}>
       ssadsadsa
     </div>
   );
