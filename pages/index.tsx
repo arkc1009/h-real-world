@@ -1,6 +1,22 @@
 import type { NextPage } from 'next';
 import tw, { css } from 'twin.macro';
 import Banner from '../components/Banner';
+import Post, { PostType } from '../components/Post';
+
+const mockPost: PostType = {
+  userName: 'Germoe',
+  postDate: new Date().toLocaleDateString(),
+  likeCount: Math.floor(Math.random() * 5000),
+  title: 'Create...',
+  desc: 'join the commun...',
+  tags: [
+    { tag: 'asdsadas' },
+    { tag: 'asdsadas1' },
+    { tag: 'asdsadas2' },
+    { tag: 'asdsadas3' },
+    { tag: 'asdsadas4' },
+  ],
+};
 
 const Home: NextPage = () => {
   return (
@@ -22,7 +38,12 @@ const Home: NextPage = () => {
           </span>
         </div>
       </Banner>
-      <section css={tw`flex flex-col items-center pt-8`}>contents!</section>
+
+      <section css={tw`w-full max-w-6xl flex flex-col px-4 pt-8`}>
+        <div css={tw`px-32`}>
+          <Post post={mockPost} />
+        </div>
+      </section>
     </div>
   );
 };
