@@ -12,7 +12,8 @@
     "@emotion/styled": "^11.9.3",
     "next": "latest",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "react-hook-form": "^7.34.0"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.9.5",
