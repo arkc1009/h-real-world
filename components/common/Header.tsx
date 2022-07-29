@@ -26,7 +26,12 @@ const Header: React.FC = () => {
 
   return (
     <header css={tw`w-full h-14 flex justify-center items-center`}>
-      <nav css={[tw`w-full max-w-6xl flex justify-between items-center px-4`]}>
+      <nav
+        css={[
+          tw`w-full max-w-6xl flex justify-between items-center px-4`,
+          tw`xl:max-w-6xl lg:max-w-4xl md:max-w-2xl`,
+        ]}
+      >
         <h2 css={tw`text-lg font-bold`}>conduit</h2>
         <div css={tw`flex gap-4`}>
           {menu.map(({ path, label }) => (
