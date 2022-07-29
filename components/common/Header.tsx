@@ -32,7 +32,7 @@ const Header: React.FC = () => {
           tw`xl:max-w-6xl lg:max-w-4xl md:max-w-2xl`,
         ]}
       >
-        <h2 css={tw`text-lg font-bold`}>conduit</h2>
+        <h2 css={tw`text-xl text-[#5CB85C] font-bold`}>conduit</h2>
         <div css={tw`flex gap-4`}>
           {menu.map(({ path, label }) => (
             <Link key={label} href={path}>
