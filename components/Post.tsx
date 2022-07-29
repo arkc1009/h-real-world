@@ -23,7 +23,7 @@ const Post: React.FC<PostProps> = ({ post, isBorder = true, ...rest }) => {
   const { userName, postDate, likeCount, title, desc, tags } = post;
 
   return (
-    <div css={isBorder && tw`pb-6 border-b`} {...rest}>
+    <div css={[tw`w-full`, isBorder && tw`pb-6 border-b`]} {...rest}>
       <PostHeader userName={userName} postDate={postDate} likeCount={likeCount} />
       <PostBody title={title} desc={desc} />
       <PostFooter tags={tags} />

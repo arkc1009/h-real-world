@@ -9,13 +9,13 @@ const Tag: React.FC<TagProps> = ({ tag, ...rest }) => {
   return (
     <div
       css={[
-        tw`flex justify-center px-2 py-[2px] cursor-pointer`,
-        tw`border border-[#DDDDDD] rounded-xl`,
+        tw`max-w-max flex justify-center px-2.5 py-[2px] cursor-pointer`,
+        tw`text-[#aaaaaa] border border-[#DDDDDD] rounded-xl`,
         tw`hover:bg-[#DDDDDD]`,
       ]}
       {...rest}
     >
-      <span css={tw`block text-[#aaaaaa] text-xs`}>{tag}</span>
+      <span css={tw`block text-xs`}>{tag}</span>
     </div>
   );
 };

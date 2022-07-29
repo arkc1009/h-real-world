@@ -17,6 +17,8 @@ const mockPost: PostType = {
     { tag: 'asdsadas1' },
     { tag: 'asdsadas2' },
     { tag: 'asdsadas3' },
+    { tag: 'asdsadas3' },
+    { tag: 'asdsadas3' },
     { tag: 'asdsadas4' },
   ],
 };
