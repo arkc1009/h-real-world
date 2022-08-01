@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import tw from 'twin.macro';
 import Page from '../components/common/Page';
 import PageContent from '../components/common/PageContent';
@@ -12,7 +13,11 @@ const Login: NextPage = () => {
     <Page>
       <PageContent>
         <h1 css={tw`text-4xl mb-3`}>Sign in</h1>
-        <span css={tw`text-[#5CB85C] text-base`}>Need an account?</span>
+        <Link href='/register'>
+          <a css={[tw`text-[#5CB85C] text-base cursor-pointer`, tw`hover:underline`]}>
+            Need an account?
+          </a>
+        </Link>
 
         <LoginForm />
       </PageContent>

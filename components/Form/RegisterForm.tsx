@@ -1,15 +1,17 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { motion, Variant } from 'framer-motion';
+import { motion } from 'framer-motion';
 import tw from 'twin.macro';
 import { postData } from '../../libs/api';
 
 interface FormInputs {
   email: string;
+  username: string;
   password: string;
+  passwordConfirm: string;
 }
 
-const LoginForm: React.FC = () => {
+const RegisterForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -18,10 +20,11 @@ const LoginForm: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormInputs> = useCallback((data) => {
     console.log('submit Data!', data);
-    const { email, password } = data;
+    const { email, password, username } = data;
 
-    postData('/users/login', {
+    postData('/users', {
       user: {
+        username,
         email,
         password,
       },
@@ -32,6 +35,20 @@ const LoginForm: React.FC = () => {
 
   return (
     <form css={tw`w-full flex flex-col gap-4 mt-5`} onSubmit={handleSubmit(onSubmit)}>
+      <input
+        {...register('username', {
+          required: true,
+        })}
+        type='text'
+        placeholder='Username'
+        css={[
+          tw`py-3 px-6 outline-none`,
+          tw`text-xl`,
+          tw`ring-1 ring-[#dddddd] rounded-sm`,
+          tw`focus:ring-sky-500`,
+        ]}
+      />
+
       <input
         {...register('email', {
           required: true,
@@ -47,10 +64,23 @@ const LoginForm: React.FC = () => {
           tw`focus:ring-sky-500`,
         ]}
       />
+
       <input
         {...register('password', { required: true })}
         type='password'
         placeholder='Password'
+        css={[
+          tw`py-3 px-6 outline-none`,
+          tw`text-xl`,
+          tw`ring-1 ring-[#dddddd] rounded-sm`,
+          tw`focus:ring-sky-500`,
+        ]}
+      />
+
+      <input
+        {...register('passwordConfirm', { required: true })}
+        type='password'
+        placeholder='Password Confirm'
         css={[
           tw`py-3 px-6 outline-none`,
           tw`text-xl`,
@@ -67,7 +97,7 @@ const LoginForm: React.FC = () => {
           tw`hover:bg-[#449d44] hover:ring-[#419641]`,
         ]}
       >
-        <span css={tw`block -mt-1`}>Sign in</span>
+        <span css={tw`block -mt-1`}>Sign up</span>
       </button>
 
       <div css={tw`flex flex-col gap-2`}>
@@ -100,4 +130,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
