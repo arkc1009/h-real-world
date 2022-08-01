@@ -31,3 +31,11 @@ yarn dev
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+
+## TODO
+- JWT 토큰 인증
+- 폼 마무리
+- 로그인 관련 로직 추가
+  - 헤더 아이템 추가 (recoil)
+  - index 페이지 컨텐츠 추가 (recoil)
+  - 등등드으등
