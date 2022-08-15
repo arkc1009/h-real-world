@@ -39,7 +39,7 @@ const Home: NextPage = () => {
             conduit
           </h1>
           <span css={tw`font-extralight text-2xl text-white`}>
-            A place to share your knowledge.
+            A place to share your knowledge. asdasdf
           </span>
         </div>
       </Banner>
