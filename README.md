@@ -5,8 +5,11 @@
 ## 잡설
 
 계정 인증은 next-auth 쓰자.
+
 서버는 그냥 next 자체 api 사용하자.
+
 planetscale + prisma 로 db 사용하자.
+
 Vercel에 배포 예정
 
 ## 로컬환경 시작하기
