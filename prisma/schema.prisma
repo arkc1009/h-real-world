@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Task {
+  id        Int       @id @default(autoincrement())
+  title     String?
+  content   String?
+  deadline  DateTime?
+  embedLink String?
+  type      String
+  members   Member[]
+  progress  Int       @default(0)
+  createdAt DateTime  @default(now())
+  updateAt  DateTime  @updatedAt
+}
+
+model Member {
+  id        Int        @id @default(autoincrement())
+  name      String?
+  colorCode String?
+  createAt  DateTime   @default(now())
+  updateAt  DateTime   @updatedAt
+  Portfolio Portfolio?
+  tasks     Task[]
+}
+
+model Portfolio {
+  id       Int    @id @default(autoincrement())
+  url      String
+  member   Member @relation(fields: [memberId], references: [id])
+  memberId Int    @unique
+}
