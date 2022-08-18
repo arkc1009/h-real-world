@@ -12,6 +12,12 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
+enum Role {
+  USER
+  MEMBER
+  ADMIN
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -45,7 +51,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  role          String    @default("user")
+  role          Role      @default(USER)
   accounts      Account[]
   sessions      Session[]
 }

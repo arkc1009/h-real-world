@@ -1,12 +1,19 @@
 import type { NextPage } from 'next';
-import tw, { css } from 'twin.macro';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import tw from 'twin.macro';
 import Banner from '../components/Banner';
 import Page from '../components/common/Page';
 import PageContent from '../components/common/PageContent';
 
 const Home: NextPage = () => {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
+
   // const [tasks, setTasks] = useState<TaskResponse[]>();
+
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
 
   return (
     <Page>
