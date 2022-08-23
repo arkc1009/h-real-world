@@ -1,5 +1,5 @@
 import { BASE_API_URL, getData } from '@lib/fetchApi';
-import usePrivate from '@lib/hooks/usePrivate';
+import usePrivate from '@lib/hooks/usePageAuth';
 import { User } from '@prisma/client';
 import Banner from 'components/Banner';
 import Page from 'components/common/Page';
@@ -13,7 +13,7 @@ const Users: NextPage = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const { pageLoading } = usePrivate();
+  const { isAuth } = usePrivate();
 
   useEffect(() => {
     setLoading(true);
@@ -25,7 +25,7 @@ const Users: NextPage = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  if (pageLoading) {
+  if (!isAuth) {
     return (
       <div css={tw`w-screen min-h-screen flex justify-center items-center`}>
         loading...
