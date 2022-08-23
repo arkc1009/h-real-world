@@ -1,11 +1,13 @@
-import { User } from '@prisma/client';
+import { Role, User } from '@prisma/client';
+import { ChangeEvent } from 'react';
 import tw from 'twin.macro';
 
 interface UserItemProps {
   user: User;
+  onEdit: (e: ChangeEvent<HTMLSelectElement>, id: string) => void;
 }
 
-const UserItem: React.FC<UserItemProps> = ({ user }) => {
+const UserItem: React.FC<UserItemProps> = ({ user, onEdit }) => {
   return (
     <li
       key={user.id}
@@ -27,7 +29,17 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
         <div css={tw`text-sm`}>{user.name}</div>
       </div>
 
-      <div>{user.role}</div>
+      <div css={tw`flex items-center pr-2 pl-2 border-l-2 border-gray-500`}>
+        <select
+          value={user.role}
+          onChange={(e) => onEdit(e, user.id)}
+          css={tw`cursor-pointer px-2`}
+        >
+          <option value={Role.ADMIN}>{Role.ADMIN}</option>
+          <option value={Role.MEMBER}>{Role.MEMBER}</option>
+          <option value={Role.USER}>{Role.USER}</option>
+        </select>
+      </div>
     </li>
   );
 };
