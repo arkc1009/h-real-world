@@ -1,50 +1,21 @@
 import { BASE_API_URL, getData } from '@lib/fetchApi';
-import { loginToast, permissionToast } from '@lib/helpers/toastManage';
+import usePrivate from '@lib/hooks/usePrivate';
 import { User } from '@prisma/client';
 import Banner from 'components/Banner';
 import Page from 'components/common/Page';
 import PageContent from 'components/common/PageContent';
 import UserList from 'components/User/UserList';
 import { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
 
 const Users: NextPage = () => {
-  const { data: session, status } = useSession();
-
   const [users, setUsers] = useState<User[]>([]);
-  const [pageLoading, setPageLoading] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
+  const { pageLoading } = usePrivate();
 
   useEffect(() => {
-    setPageLoading(true);
-
-    if (status === 'unauthenticated') {
-      router.push('/');
-      setPageLoading(false);
-      loginToast();
-
-      return;
-    }
-
-    if (!session) {
-      return;
-    }
-
-    if (session.role !== 'ADMIN') {
-      router.push('/');
-      setPageLoading(false);
-      permissionToast();
-
-      return;
-    }
-
-    setPageLoading(false);
-
     setLoading(true);
     getData(`${BASE_API_URL}/users`)
       .then((res) => {
@@ -52,7 +23,7 @@ const Users: NextPage = () => {
         console.log(res);
       })
       .finally(() => setLoading(false));
-  }, [session, router, status]);
+  }, []);
 
   if (pageLoading) {
     return (
