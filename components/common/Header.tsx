@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { useCallback, useMemo, useState } from 'react';
 import tw from 'twin.macro';
 
 const Header: React.FC = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const [onToggleMenu, setOnToggleMenu] = useState(false);
 
@@ -48,6 +50,11 @@ const Header: React.FC = () => {
     ],
     []
   );
+
+  const onLogout = useCallback(async () => {
+    await router.replace('/');
+    signOut();
+  }, [router]);
 
   return (
     <header css={tw`w-full h-14 flex justify-center items-center z-10`}>
@@ -102,9 +109,9 @@ const Header: React.FC = () => {
                   <button
                     type='button'
                     css={[tw`text-sm`, tw`hover:opacity-75`]}
-                    onClick={() => signOut()}
+                    onClick={onLogout}
                   >
-                    Sign Out
+                    로그아웃
                   </button>
                 </div>
               </motion.div>
@@ -113,7 +120,7 @@ const Header: React.FC = () => {
 
           {!session && (
             <button type='button' css={tw`text-sm`} onClick={() => signIn('google')}>
-              Sign In
+              로그인 하기
             </button>
           )}
         </div>
