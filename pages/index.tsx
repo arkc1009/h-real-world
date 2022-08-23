@@ -1,10 +1,15 @@
+import { motion } from 'framer-motion';
 import type { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect } from 'react';
 import tw from 'twin.macro';
 import Banner from '../components/Banner';
 import Page from '../components/common/Page';
 import PageContent from '../components/common/PageContent';
+
+import HyoiImg from '../public/images/hyoi.png';
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
@@ -20,31 +25,21 @@ const Home: NextPage = () => {
       <Banner />
 
       <PageContent>
-        <div css={tw`w-full flex justify-center gap-8`}>
-          HOME!
-          {/* <div css={tw`w-3/4 flex flex-col gap-5`}>
-            {tasks?.map((task) => (
-              <div key={task.id}>
-                <h2 css={tw`text-2xl font-semibold`}>{task.title}</h2>
-                <div>
-                  {task.members.map((member) => (
-                    <span key={member.id} css={tw`ml-2`}>
-                      {member.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+        <div css={tw`w-full grid grid-cols-2 grid-rows-[repeat(2, 250px)] gap-8`}>
+          <div css={tw`col-span-2 flex justify-center items-center bg-onlyOne1 relative`}>
+            <motion.div whileHover={{ x: 250 }} css={tw`w-full h-full absolute`}>
+              <Image src={HyoiImg} alt='' layout='fill' objectFit='contain' />
+            </motion.div>
+            멤버 소개
           </div>
-
-          <div
-            css={[
-              tw`w-1/4 bg-[#f3f3f3] p-2 rounded-md`,
-              css`
-                height: max-content;
-              `,
-            ]}
-          ></div> */}
+          <div css={tw`flex justify-center items-center bg-onlyOne2`}>마감 관리</div>
+          <div css={[tw`bg-onlyOne3 bg-opacity-70`, tw`hover:bg-opacity-90`]}>
+            <Link href='/users'>
+              <a css={tw`flex justify-center items-center w-full h-full cursor-pointer`}>
+                멤버 관리
+              </a>
+            </Link>
+          </div>
         </div>
       </PageContent>
     </Page>
