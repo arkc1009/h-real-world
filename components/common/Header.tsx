@@ -81,7 +81,7 @@ const Header: React.FC = () => {
                 alt='profile image'
                 css={[
                   tw`w-9 h-9 bg-coolGray-700`,
-                  tw`rounded-full shadow-md cursor-pointer z-20`,
+                  tw`rounded-full shadow-md cursor-pointer`,
                 ]}
                 onClick={onClickProfile}
               />
@@ -91,7 +91,7 @@ const Header: React.FC = () => {
                 initial='exit'
                 animate={onToggleMenu ? 'enter' : 'exit'}
                 css={[
-                  tw`absolute w-max bg-white shadow-lg top-8 py-2 px-4 z-20`,
+                  tw`absolute w-max bg-white shadow-lg top-10 right-1 py-2 px-4`,
                   tw`rounded-md`,
                 ]}
               >

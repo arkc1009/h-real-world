@@ -10,8 +10,8 @@ const Banner: React.FC<BannerProps> = ({ ...rest }) => {
   return (
     <div
       css={[
-        tw`w-full h-60 flex justify-center items-center shadow-inner`,
-        tw`bg-slate-100`,
+        tw`w-full h-60 flex justify-center items-center -z-20`,
+        tw`bg-slate-100 shadow-inner`,
         tw`select-none`,
       ]}
       {...rest}
@@ -23,7 +23,7 @@ const Banner: React.FC<BannerProps> = ({ ...rest }) => {
         whileHover={{ scale: 1.1 }}
         src='images/logo.png'
         alt=''
-        css={tw`w-96 overflow-hidden z-0`}
+        css={tw`w-96 overflow-hidden -z-10`}
       />
     </div>
   );
