@@ -36,6 +36,10 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
       .then((res) => {
         setTempUsers(res);
         setActiveChange(false);
+        toast.success('수정을 성공했습니다!', {
+          autoClose: 1500,
+          position: 'top-center',
+        });
       })
       .catch((e) => toast.error(e, { autoClose: 1500 }));
   }, [tempUsers, setTempUsers]);

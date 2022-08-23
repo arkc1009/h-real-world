@@ -1,6 +1,5 @@
 import prisma from '@lib/prisma';
 import { User } from '@prisma/client';
-import UserItem from 'components/User/UserItem';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
