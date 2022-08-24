@@ -12,11 +12,11 @@ const UserItem: React.FC<UserItemProps> = ({ user, onEdit }) => {
     <li
       key={user.id}
       css={[
-        tw`w-full flex items-center justify-between gap-4 py-2 px-4`,
-        tw`ring-1 ring-gray-500 rounded-sm`,
+        tw`w-full flex items-center justify-between gap-4 p-4`,
+        tw`border-b border-gray-300 rounded-sm`,
       ]}
     >
-      <div css={tw`flex items-center gap-2`}>
+      <div css={tw`flex items-center gap-4`}>
         {user.image ? (
           <img
             src={user.image}
@@ -26,7 +26,9 @@ const UserItem: React.FC<UserItemProps> = ({ user, onEdit }) => {
         ) : (
           <div>{user.name?.slice(0, 2)}</div>
         )}
-        <div css={tw`text-sm`}>{user.name}</div>
+        <div css={tw`font-semibold`} title={user.name || '유저 이름'}>
+          {user.name}
+        </div>
       </div>
 
       <div css={tw`flex items-center pr-2 pl-2 border-l-2 border-gray-500`}>

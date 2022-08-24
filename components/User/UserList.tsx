@@ -78,9 +78,11 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
       </div>
 
       <ul css={tw`w-full flex flex-col gap-4 select-none`}>
-        {tempUsers.map((user) => (
-          <UserItem key={user.id} user={user} onEdit={editRole} />
-        ))}
+        {tempUsers.length !== 0
+          ? tempUsers.map((user) => (
+              <UserItem key={user.id} user={user} onEdit={editRole} />
+            ))
+          : '아직 가입된 멤버가 없는 것 같아요..'}
       </ul>
     </div>
   );
