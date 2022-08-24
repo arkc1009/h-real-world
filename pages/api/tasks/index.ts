@@ -9,7 +9,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         const tasks = await prisma.task.findMany({
           include: {
-            members: true,
+            vocals: true,
+            mixers: true,
+            drawers: true,
+            editers: true,
+            designers: true,
           },
         });
         res.status(200).json(tasks);

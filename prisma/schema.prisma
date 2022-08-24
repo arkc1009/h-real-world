@@ -18,6 +18,12 @@ enum Role {
   ADMIN
 }
 
+enum Progress {
+  READY
+  GOING
+  END
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -46,14 +52,20 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
-  role          Role      @default(USER)
+  role          Role       @default(USER)
   accounts      Account[]
   sessions      Session[]
+  portfolio     Portfolio?
+  vocalsTasks   Task[]     @relation(name: "vocals")
+  mixersTasks   Task[]     @relation(name: "mixers")
+  drawersTasks  Task[]     @relation(name: "drawers")
+  editersTasks  Task[]     @relation(name: "editers")
+  designers     Task[]     @relation(name: "designers")
 }
 
 model VerificationToken {
@@ -65,31 +77,28 @@ model VerificationToken {
 }
 
 model Task {
-  id        Int       @id @default(autoincrement())
-  title     String?
-  content   String?
-  deadline  DateTime?
-  embedLink String?
-  type      String
-  members   Member[]
-  progress  Int       @default(0)
-  createdAt DateTime  @default(now())
-  updateAt  DateTime  @updatedAt
-}
-
-model Member {
-  id        Int        @id @default(autoincrement())
-  name      String?
-  colorCode String?
-  createAt  DateTime   @default(now())
-  updateAt  DateTime   @updatedAt
-  Portfolio Portfolio?
-  tasks     Task[]
+  id          Int       @id @default(autoincrement())
+  title       String?
+  content     String?
+  deadline    DateTime?
+  embedLink   String?
+  vocals      User[]    @relation(name: "vocals")
+  mixers      User[]    @relation(name: "mixers")
+  drawers     User[]    @relation(name: "drawers")
+  editers     User[]    @relation(name: "editers")
+  designers   User[]    @relation(name: "designers")
+  progress    Progress  @default(READY)
+  isEndMix    Boolean   @default(false)
+  isEndDraw   Boolean   @default(false)
+  isEndMovie  Boolean   @default(false)
+  isEndDesign Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updateAt    DateTime  @updatedAt
 }
 
 model Portfolio {
-  id       Int    @id @default(autoincrement())
-  url      String
-  member   Member @relation(fields: [memberId], references: [id])
-  memberId Int    @unique
+  id     Int    @id @default(autoincrement())
+  url    String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
 }
