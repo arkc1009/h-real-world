@@ -2,10 +2,24 @@ import Page from 'components/common/Page';
 import PageContent from 'components/common/PageContent';
 import { motion } from 'framer-motion';
 import { NextPage } from 'next';
-import Link from 'next/link';
+import { signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import tw from 'twin.macro';
 
 const Forbidden: NextPage = () => {
+  const router = useRouter();
+  const onContinue = useCallback(async () => {
+    try {
+      await router.replace('/');
+      await signOut();
+      await signIn();
+    } catch {
+      await router.replace('/');
+      await signOut();
+    }
+  }, [router]);
+
   return (
     <Page>
       <PageContent>
@@ -22,7 +36,13 @@ const Forbidden: NextPage = () => {
               tw`hover:text-red-500 hover:underline hover:underline-offset-4`,
             ]}
           >
-            <Link href='/api/auth/signin' title='클릭 시 로그인으로 넘어갑니다..'>갈!!!</Link>
+            <button
+              type='button'
+              title='클릭 시 로그인으로 넘어갑니다..'
+              onClick={onContinue}
+            >
+              갈!!!
+            </button>
           </motion.div>
         </div>
       </PageContent>
