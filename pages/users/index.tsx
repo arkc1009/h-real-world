@@ -1,6 +1,6 @@
 import { BASE_API_URL, getData } from '@lib/fetchApi';
 import usePrivate from '@lib/hooks/usePageAuth';
-import { User } from '@prisma/client';
+import { UserResponse } from '@lib/schema';
 import Banner from 'components/Banner';
 import Page from 'components/common/Page';
 import PageContent from 'components/common/PageContent';
@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import tw from 'twin.macro';
 
 const Users: NextPage = () => {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<UserResponse[]>([]);
   const [loading, setLoading] = useState(false);
 
   const { isAuth } = usePrivate();
