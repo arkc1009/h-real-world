@@ -1,3 +1,5 @@
+import tw from 'twin.macro';
+import Footer from './Footer';
 import Header from './Header';
 
 interface LayoutProps {
@@ -8,7 +10,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main css={tw`min-h-[75vh]`}>{children}</main>
+      <Footer />
     </>
   );
 };
