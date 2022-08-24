@@ -1,4 +1,3 @@
-import { loginToast, permissionToast } from '@lib/helpers/toastManage';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -10,12 +9,9 @@ const usePathAuth = () => {
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    const permissionRoute = () => {
+    const permissionRoute = async () => {
       if (status === 'unauthenticated') {
-        router.replace('/forbidden').then(() => {
-          loginToast();
-        });
-
+        await router.replace('/forbidden');
         return;
       }
 
@@ -24,10 +20,7 @@ const usePathAuth = () => {
       }
 
       if (session.role !== 'ADMIN') {
-        router.replace('/forbidden').then(() => {
-          permissionToast();
-        });
-
+        await router.replace('/forbidden');
         return;
       }
 
