@@ -3,28 +3,30 @@ import { HTMLAttributes } from 'react';
 import tw from 'twin.macro';
 
 interface BannerProps extends HTMLAttributes<HTMLDivElement> {
-  bgColor?: string;
+  visiableImage?: boolean;
 }
 
-const Banner: React.FC<BannerProps> = ({ ...rest }) => {
+const Banner: React.FC<BannerProps> = ({ visiableImage = true, ...rest }) => {
   return (
     <div
       css={[
         tw`w-full h-60 flex justify-center items-center -z-20`,
-        tw`bg-slate-100 shadow-inner`,
+        tw`bg-slate-100 shadow-inner overflow-hidden`,
         tw`select-none`,
       ]}
       {...rest}
     >
-      <motion.img
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        whileHover={{ scale: 1.1 }}
-        src='images/logo.png'
-        alt=''
-        css={tw`w-96 overflow-hidden -z-10`}
-      />
+      {visiableImage ? (
+        <motion.img
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          whileHover={{ scale: 1.1 }}
+          src='images/logo.png'
+          alt=''
+          css={tw`w-96 overflow-hidden -z-10`}
+        />
+      ) : null}
     </div>
   );
 };

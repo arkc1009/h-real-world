@@ -39,7 +39,7 @@ const Users: NextPage = () => {
 
   return (
     <Page>
-      <Banner />
+      <Banner visiableImage={false} css={tw`h-[1px]`} />
 
       <div
         css={[tw`flex flex-col items-center gap-2 mt-8`, tw`xl:flex-row xl:items-end`]}
