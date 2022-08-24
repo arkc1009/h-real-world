@@ -12,7 +12,7 @@ const usePathAuth = () => {
   useEffect(() => {
     const permissionRoute = () => {
       if (status === 'unauthenticated') {
-        router.push('/').then(() => {
+        router.replace('/forbidden').then(() => {
           loginToast();
         });
 
@@ -24,7 +24,7 @@ const usePathAuth = () => {
       }
 
       if (session.role !== 'ADMIN') {
-        router.push('/').then(() => {
+        router.replace('/forbidden').then(() => {
           permissionToast();
         });
 
