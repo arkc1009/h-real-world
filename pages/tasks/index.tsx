@@ -1,25 +1,15 @@
-import { BASE_API_URL, getData } from '@lib/fetchApi';
 import { TaskResponse } from '@lib/schema';
-import { Progress } from '@prisma/client';
 import Banner from 'components/Banner';
 import Page from 'components/common/Page';
 import PageContent from 'components/common/PageContent';
 import Task from 'components/Tasks/Task';
-import { motion } from 'framer-motion';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import tw, { css } from 'twin.macro';
+import useSWR from 'swr';
+import tw from 'twin.macro';
 
 const Tasks: NextPage = () => {
-  const [tasks, setTasks] = useState<TaskResponse[]>([]);
-
-  useEffect(() => {
-    getData(`${BASE_API_URL}/tasks`).then((res) => {
-      setTasks(res);
-      console.log(res);
-    });
-  }, []);
+  const { data: tasks, error } = useSWR<TaskResponse[]>('/api/tasks');
 
   // const temp = () => {
   //   return (
@@ -101,9 +91,9 @@ const Tasks: NextPage = () => {
       </div>
 
       <PageContent>
-        {tasks.map((task) => (
-          <Task key={task.id} task={task} />
-        ))}
+        {!tasks && !error
+          ? 'loading...'
+          : tasks?.map((task) => <Task key={task.id} task={task} />)}
       </PageContent>
     </Page>
   );

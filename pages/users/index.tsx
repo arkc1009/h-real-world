@@ -1,4 +1,3 @@
-import { BASE_API_URL, getData } from '@lib/fetchApi';
 import usePrivate from '@lib/hooks/usePageAuth';
 import { UserResponse } from '@lib/schema';
 import Banner from 'components/Banner';
@@ -7,27 +6,13 @@ import PageContent from 'components/common/PageContent';
 import UserList from 'components/User/UserList';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import tw from 'twin.macro';
 
 const Users: NextPage = () => {
-  const [users, setUsers] = useState<UserResponse[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { data: users, error } = useSWR<UserResponse[]>('/api/users/getUsers');
 
   const { isAuth } = usePrivate();
-
-  useEffect(() => {
-    setLoading(true);
-    getData(`${BASE_API_URL}/users/getUsers`)
-      .then((res) => {
-        if (!res.error) {
-          setUsers(res);
-        } else {
-          setUsers([]);
-        }
-      })
-      .finally(() => setLoading(false));
-  }, []);
 
   if (!isAuth) {
     return (
@@ -50,7 +35,9 @@ const Users: NextPage = () => {
         </h3>
       </div>
 
-      <PageContent>{loading ? 'loading...' : <UserList users={users} />}</PageContent>
+      <PageContent>
+        {!users && !error ? 'loading...' : <UserList users={users || []} />}
+      </PageContent>
     </Page>
   );
 };
