@@ -18,7 +18,7 @@ const Users: NextPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    getData(`${BASE_API_URL}/users`)
+    getData(`${BASE_API_URL}/users/getUsers`)
       .then((res) => {
         if (!res.error) {
           setUsers(res);

@@ -7,7 +7,7 @@ async function editUsersHandler(req: NextApiRequest, res: NextApiResponse) {
   const { users } = req.body;
 
   if (!users) {
-    res.status(400).json({ error: 'not data!' });
+    res.status(400).json({ error: '올바르지 않은 요청입니다!' });
     return;
   }
 
