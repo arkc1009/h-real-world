@@ -4,8 +4,8 @@ import { TaskResponse } from '@lib/schema';
 import { Progress } from '@prisma/client';
 import ProgressBar from 'components/common/ProgressBar';
 import { motion } from 'framer-motion';
-import { useEffect, useMemo } from 'react';
-import tw, { css } from 'twin.macro';
+import { useCallback, useMemo } from 'react';
+import tw from 'twin.macro';
 
 interface TaskProps {
   task: TaskResponse;
@@ -15,12 +15,6 @@ const labelColor = {
   READY: tw`bg-onlyOne3 bg-opacity-70`,
   GOING: tw`bg-onlyOne1 bg-opacity-90`,
   END: tw`bg-slate-300`,
-};
-
-const cardBorder = {
-  READY: tw`border-2 border-gray-600 border-dashed`,
-  GOING: tw`ring-2 ring-gray-600`,
-  END: tw`ring-0`,
 };
 
 const Task: React.FC<TaskProps> = ({ task }) => {
@@ -34,21 +28,18 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   );
 
   const dateDiff = useMemo(
-    () => Math.floor(getDateDiff(new Date(), new Date(task.deadline))),
+    () => getDateDiff(new Date(), new Date(task.deadline)),
     [task.deadline]
   );
 
-  useEffect(() => {
-    console.log(dateDiff);
-  }, [dateDiff]);
 
   return (
     <motion.div
       css={[
-        cardBorder[task.progress],
-        tw`flex flex-col w-96 rounded-md`,
+        tw`flex flex-col w-96 rounded-md bg-white shadow-lg`,
         tw`select-none cursor-pointer`,
         task.progress === Progress.END && tw`opacity-50`,
+        task.progress === Progress.READY && tw`border-2 border-gray-600 border-dashed`,
       ]}
       whileHover={{ y: -5 }}
     >
