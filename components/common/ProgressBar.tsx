@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import tw, { css, TwStyle } from 'twin.macro';
+import tw, { TwStyle } from 'twin.macro';
 
 interface ProgressBarProps {
   progress: string | number;
