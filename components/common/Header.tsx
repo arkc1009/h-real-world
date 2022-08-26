@@ -7,6 +7,7 @@ import tw from 'twin.macro';
 import TwitterImg from '../../public/images/twitter.png';
 import YouTubeImg from '../../public/images/youtube.png';
 import InstagramImg from '../../public/images/instagram.png';
+import LogoImg from '../../public/images/logo.png';
 import Image from 'next/image';
 
 const Header: React.FC = () => {
@@ -69,7 +70,7 @@ const Header: React.FC = () => {
           tw`xl:max-w-6xl lg:max-w-4xl md:max-w-2xl`,
         ]}
       >
-        <div css={tw`flex gap-4`}>
+        <div css={[tw`hidden gap-4`, tw`md:flex`]}>
           {menu.map(({ path, label }) => (
             <a
               key={path}
@@ -82,19 +83,30 @@ const Header: React.FC = () => {
             </a>
           ))}
         </div>
+
+        <div css={tw`w-16 h-16`}>
+          {router.pathname !== '/' && (
+            <Image
+              src={LogoImg}
+              alt='logo and route to home'
+              css={tw`cursor-pointer`}
+              onClick={() => router.push('/')}
+            />
+          )}
+        </div>
+
         <div css={tw`flex items-center gap-4`}>
-          {session && (
+          {session && session.user && (
             <div
               css={tw`flex items-center gap-2 relative`}
               onMouseLeave={() => setOnToggleMenu(false)}
             >
-              <img
-                src={session.user?.image || ''}
+              <Image
+                src={session.user.image || ''}
                 alt='profile image'
-                css={[
-                  tw`w-9 h-9 bg-coolGray-700`,
-                  tw`rounded-full shadow-md cursor-pointer`,
-                ]}
+                css={[tw`rounded-full shadow-md cursor-pointer`]}
+                width={36}
+                height={36}
                 onClick={onClickProfile}
               />
 
@@ -109,7 +121,7 @@ const Header: React.FC = () => {
               >
                 <div css={tw`flex flex-col items-start py-4`}>
                   <div css={[tw`text-sm font-semibold`, tw`border-b pb-2 mb-2`]}>
-                    {session.user?.name}
+                    {session.user.name}
                   </div>
                   <button
                     type='button'
