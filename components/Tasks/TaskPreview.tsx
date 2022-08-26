@@ -4,6 +4,7 @@ import { TaskResponse } from '@lib/schema';
 import { Progress } from '@prisma/client';
 import ProgressBar from 'components/common/ProgressBar';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import tw from 'twin.macro';
 
@@ -17,7 +18,8 @@ const labelColor = {
   END: tw`bg-slate-300`,
 };
 
-const Task: React.FC<TaskProps> = ({ task }) => {
+const TaskPreview: React.FC<TaskProps> = ({ task }) => {
+  const router = useRouter();
 
   const { isEndRecode, isEndMix, isEndDraw, isEndMovie, isEndDesign } = task;
 
@@ -32,6 +34,12 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     [task.deadline]
   );
 
+  const routeTaskPage = useCallback(
+    (taskId: number) => {
+      router.push(`${router.asPath}/${taskId}`);
+    },
+    [router]
+  );
 
   return (
     <motion.div
@@ -42,6 +50,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
         task.progress === Progress.READY && tw`border-2 border-gray-600 border-dashed`,
       ]}
       whileHover={{ y: -5 }}
+      onClick={() => routeTaskPage(task.id)}
     >
       <div css={[labelColor[task.progress], tw`h-6 rounded-t-md`]}></div>
 
@@ -62,4 +71,4 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   );
 };
 
-export default Task;
+export default TaskPreview;
