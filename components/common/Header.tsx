@@ -4,6 +4,11 @@ import { useRouter } from 'next/router';
 import { useCallback, useMemo, useState } from 'react';
 import tw from 'twin.macro';
 
+import TwitterImg from '../../public/images/twitter.png';
+import YouTubeImg from '../../public/images/youtube.png';
+import InstagramImg from '../../public/images/instagram.png';
+import Image from 'next/image';
+
 const Header: React.FC = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -37,15 +42,15 @@ const Header: React.FC = () => {
     () => [
       {
         path: 'https://twitter.com/world_OnlyOne',
-        label: <img src='images/twitter.png' alt='twitter' />,
+        label: <Image src={TwitterImg} alt='twitter' />,
       },
       {
         path: 'https://www.youtube.com/channel/UC8iW8WOnpnMCBfeG3CgO-lg',
-        label: <img src='images/youtube.png' alt='youtube' />,
+        label: <Image src={YouTubeImg} alt='youtube' />,
       },
       {
         path: 'https://www.instagram.com/world_only.one/',
-        label: <img src='images/instagram.png' alt='instagram' />,
+        label: <Image src={InstagramImg} alt='instagram' />,
       },
     ],
     []
