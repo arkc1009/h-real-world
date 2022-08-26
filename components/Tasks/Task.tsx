@@ -1,6 +1,8 @@
 import getDateDiff from '@lib/helpers/getDateDiff';
+import progressToPercentage from '@lib/helpers/progressToPercentage';
 import { TaskResponse } from '@lib/schema';
 import { Progress } from '@prisma/client';
+import ProgressBar from 'components/common/ProgressBar';
 import { motion } from 'framer-motion';
 import { useEffect, useMemo } from 'react';
 import tw, { css } from 'twin.macro';
@@ -22,17 +24,13 @@ const cardBorder = {
 };
 
 const Task: React.FC<TaskProps> = ({ task }) => {
+
   const { isEndRecode, isEndMix, isEndDraw, isEndMovie, isEndDesign } = task;
 
-  const progressArr = useMemo(
-    () => [isEndRecode, isEndMix, isEndDraw, isEndMovie, isEndDesign],
-    [isEndRecode, isEndMix, isEndDraw, isEndMovie, isEndDesign]
-  );
-
-  const isEnds = useMemo(() => progressArr.filter((pro) => pro), [progressArr]);
   const progress = useMemo(
-    () => ((isEnds.length / progressArr.length) * 100).toFixed(0),
-    [isEnds.length, progressArr.length]
+    () =>
+      progressToPercentage([isEndRecode, isEndMix, isEndDraw, isEndMovie, isEndDesign]),
+    [isEndRecode, isEndMix, isEndDraw, isEndMovie, isEndDesign]
   );
 
   const dateDiff = useMemo(
@@ -67,20 +65,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 
         <p css={tw`text-sm`}>{task.content}</p>
 
-        <div
-          css={[tw`w-full h-4 text-center relative mt-4`, tw`bg-gray-300 rounded-full`]}
-        >
-          <div css={tw`text-xs`}>{progress}%</div>
-          <div
-            css={[
-              tw`w-full h-full absolute top-0 rounded-full`,
-              tw`bg-gradient-to-r from-onlyOne2 to-onlyOne1`,
-              css`
-                width: ${progress}%;
-              `,
-            ]}
-          ></div>
-        </div>
+        <ProgressBar progress={progress} />
       </div>
     </motion.div>
   );
