@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 import Footer from './Footer';
-import Header from './Header';
+import SideBar from './SideBar';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -9,9 +9,13 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Header />
-      <main css={tw`min-h-[85vh] bg-neutral-100`}>{children}</main>
-      <Footer />
+      <div css={tw`w-screen flex`}>
+        <SideBar />
+        <div css={tw`w-[calc(100% - 16rem)]`}>
+          <main css={tw`w-full min-h-[85vh] `}>{children}</main>
+          <Footer />
+        </div>
+      </div>
     </>
   );
 };
