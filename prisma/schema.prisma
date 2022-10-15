@@ -77,24 +77,30 @@ model VerificationToken {
 }
 
 model Task {
-  id          Int       @id @default(autoincrement())
-  title       String?
-  content     String?
-  deadline    DateTime?
-  embedLink   String?
-  vocals      User[]    @relation(name: "vocals")
-  mixers      User[]    @relation(name: "mixers")
-  drawers     User[]    @relation(name: "drawers")
-  editers     User[]    @relation(name: "editers")
-  designers   User[]    @relation(name: "designers")
-  progress    Progress  @default(READY)
-  isEndRecode Boolean   @default(false)
-  isEndMix    Boolean   @default(false)
-  isEndDraw   Boolean   @default(false)
-  isEndMovie  Boolean   @default(false)
-  isEndDesign Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updateAt    DateTime  @updatedAt
+  id             Int       @id @default(autoincrement())
+  title          String?
+  content        String?
+  deadline       DateTime?
+  deadlineFinal  DateTime?
+  deadlineRecode DateTime?
+  deadlineMix    DateTime?
+  deadlineDraw   DateTime?
+  deadlineMovie  DateTime?
+  deadlineDesign DateTime?
+  embedLink      String?
+  vocals         User[]    @relation(name: "vocals")
+  mixers         User[]    @relation(name: "mixers")
+  drawers        User[]    @relation(name: "drawers")
+  editers        User[]    @relation(name: "editers")
+  designers      User[]    @relation(name: "designers")
+  progress       Progress  @default(READY)
+  isEndRecode    Boolean   @default(false)
+  isEndMix       Boolean   @default(false)
+  isEndDraw      Boolean   @default(false)
+  isEndMovie     Boolean   @default(false)
+  isEndDesign    Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updateAt       DateTime  @updatedAt
 }
 
 model Portfolio {
