@@ -12,8 +12,10 @@ const UserItem: React.FC<UserItemProps> = ({ user, onEdit }) => {
     <li
       key={user.id}
       css={[
-        tw`w-full flex items-center justify-between gap-4 p-4`,
-        tw`border-b border-gray-300 rounded-sm`,
+        tw`w-full flex items-center justify-between gap-4 py-4 px-8`,
+        tw`rounded-sm`,
+        tw`cursor-pointer`,
+        tw`hover:bg-gray-50 hover:shadow-sm`,
       ]}
     >
       <div css={tw`flex items-center gap-4`}>
@@ -26,8 +28,9 @@ const UserItem: React.FC<UserItemProps> = ({ user, onEdit }) => {
         ) : (
           <div>{user.name?.slice(0, 2)}</div>
         )}
-        <div css={tw`font-semibold`} title={user.name || '유저 이름'}>
-          {user.name}
+        <div css={tw`flex flex-col text-sm`} title={user.name || '유저 이름'}>
+          <div>{user.name}</div>
+          <div css={tw`text-xs text-slate-600`}>믹스</div>
         </div>
       </div>
 

@@ -38,8 +38,6 @@ const SideBar: React.FC = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
   const [onToggleMenu, setOnToggleMenu] = useState(false);
 
   const onClickProfile = useCallback(() => {
@@ -91,16 +89,10 @@ const SideBar: React.FC = () => {
     signOut();
   }, [router]);
 
-  useEffect(() => {
-    if (onToggleMenu) {
-      dropdownRef.current?.focus();
-    }
-  }, [onToggleMenu]);
-
   return (
     <nav
       css={[
-        tw`relative w-64 h-screen flex flex-col py-8 px-6 z-10`,
+        tw`relative w-64 h-full flex flex-col py-8 px-6 z-10`,
         tw`bg-[#f9fafa]`,
         tw`shadow-inner`,
       ]}
@@ -125,7 +117,6 @@ const SideBar: React.FC = () => {
             </div>
 
             <motion.div
-              ref={dropdownRef}
               variants={dropdownAnimate}
               initial='exit'
               animate={onToggleMenu ? 'enter' : 'exit'}
@@ -199,7 +190,7 @@ const SideBar: React.FC = () => {
         </li>
       </ul>
 
-      <ul css={[tw`mb-4 pb-4`, tw`text-slate-600`]}>
+      <ul css={[tw`flex flex-col gap-2 mb-4 pb-4`, tw`text-slate-500`]}>
         {menu.map(({ path, label }) => (
           <li
             key={path}
@@ -210,6 +201,7 @@ const SideBar: React.FC = () => {
               tw`rounded-lg`,
               tw`cursor-pointer`,
               tw`hover:bg-gray-100`,
+              router.pathname === path && tw`text-slate-800 bg-gray-100`,
             ]}
           >
             {label}
@@ -227,6 +219,7 @@ const SideBar: React.FC = () => {
         <Image
           src={LogoImg}
           alt='logo and route to home'
+          width={48}
           height={48}
           css={tw`cursor-pointer object-contain`}
           onClick={() => router.push('/')}

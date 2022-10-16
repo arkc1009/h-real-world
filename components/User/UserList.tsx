@@ -2,7 +2,8 @@ import useMutation from '@lib/hooks/useMutation';
 import { Role, User } from '@prisma/client';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import tw from 'twin.macro';
+import scrollStyle from 'styles/scrollStyle';
+import tw, { css } from 'twin.macro';
 import UserItem from './UserItem';
 
 interface UserListProps {
@@ -52,9 +53,9 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
   }, [data, loading, error]);
 
   return (
-    <div css={tw`w-full`}>
-      <div css={tw`flex justify-between gap-4`}>
-        {activeChange ? (
+    <div css={[tw`w-full h-full py-4`, scrollStyle.hover]}>
+      {activeChange ? (
+        <div css={tw`flex justify-between gap-4 px-8`}>
           <button
             type='button'
             css={[
@@ -67,29 +68,29 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
           >
             변경사항을 저장하시겠습니까?
           </button>
-        ) : (
-          <div>{null}</div>
-        )}
-        <button
-          type='button'
-          css={[
-            tw`py-2 px-4 rounded-md mb-4 shadow-sm`,
-            tw`bg-slate-300 bg-opacity-60 `,
-            tw`disabled:opacity-50 disabled:hover:bg-opacity-50`,
-            tw`hover:bg-opacity-90`,
-            tw`active:bg-slate-400 active:shadow-inner`,
-          ]}
-          onClick={onReset}
-          disabled={!activeChange}
-        >
-          수정사항 리셋
-        </button>
-      </div>
 
+          <button
+            type='button'
+            css={[
+              tw`py-2 px-4 rounded-md mb-4 shadow-sm`,
+              tw`bg-slate-300 bg-opacity-60 `,
+              tw`disabled:opacity-50 disabled:hover:bg-opacity-50`,
+              tw`hover:bg-opacity-90`,
+              tw`active:bg-slate-400 active:shadow-inner`,
+            ]}
+            onClick={onReset}
+            disabled={!activeChange}
+          >
+            수정사항 리셋
+          </button>
+        </div>
+      ) : (
+        <div>{null}</div>
+      )}
       {loading && error ? (
         'loading...'
       ) : (
-        <ul css={tw`w-full flex flex-col gap-4 select-none`}>
+        <ul css={tw`w-full flex flex-col select-none`}>
           {tempUsers.length !== 0
             ? tempUsers.map((user) => (
                 <UserItem key={user.id} user={user} onEdit={editRole} />
