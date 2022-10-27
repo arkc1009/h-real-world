@@ -57,8 +57,11 @@ NEXTAUTH_SECRET=<시크릿 키>
 - next auth로 계정 인증 F
 - Task CRUD (role === MEMBER || role === ADMIN)
 - Member CRUD (role === ADMIN)
-- Member별 포토폴리오 설정 (이건 개인이)
+- 사이드바 접기 피기 (Collapse)
+- UI 설계
 
 ## Flow & API
 - Login -> GET Profile (profile data, my Tasks) -> Use Site
 - Logout -> DELETE Session -> Route Home
+- 일감 클릭 -> 해당 일감의 id를 쿼리 or 파라미터로 쏴줌 -> router로 읽어와서 컨텐츠 표시.
+- 내 작품, 전체 작품 모두 같은 페이지, 같은 컴포넌트를 사용하고, key따라 내 마감물 or 전체 마감물을 props로 내려주면 모두 동작하게끔 해야함!
