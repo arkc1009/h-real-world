@@ -160,7 +160,7 @@ const SideBar: React.FC = () => {
         {!session && (
           <button
             type='button'
-            css={[tw`text-sm text-green-500 font-semibold`]}
+            css={[tw`text-sm text-green-500 font-semibold px-2`]}
             onClick={() => signIn('google')}
           >
             로그인 하기
@@ -171,7 +171,7 @@ const SideBar: React.FC = () => {
       <ul css={[tw`my-4 pb-4`, tw`text-slate-600`, tw`border-b`]}>
         <li
           css={[
-            tw`flex items-center justify-between p-2`,
+            tw`flex items-center justify-between py-2 px-4`,
             tw`text-sm font-semibold`,
             tw`rounded-lg`,
             tw`cursor-pointer`,
@@ -196,7 +196,7 @@ const SideBar: React.FC = () => {
             key={path}
             onClick={() => router.push(path)}
             css={[
-              tw`flex items-center justify-between p-2`,
+              tw`relative flex items-center justify-between py-2 px-4`,
               tw`text-sm font-semibold`,
               tw`rounded-lg`,
               tw`cursor-pointer`,
@@ -204,7 +204,15 @@ const SideBar: React.FC = () => {
               router.pathname === path && tw`text-slate-800 bg-gray-100`,
             ]}
           >
-            {label}
+            <div
+              css={[
+                tw`w-[4px] h-full`,
+                tw`absolute top-0 left-0`,
+                tw`rounded-l-lg`,
+                router.pathname === path && tw`bg-blue-400`,
+              ]}
+            />
+            <span css={router.pathname === path && tw`text-blue-500`}>{label}</span>
           </li>
         ))}
       </ul>
