@@ -58,3 +58,7 @@ NEXTAUTH_SECRET=<시크릿 키>
 - Task CRUD (role === MEMBER || role === ADMIN)
 - Member CRUD (role === ADMIN)
 - Member별 포토폴리오 설정 (이건 개인이)
+
+## Flow & API
+- Login -> GET Profile (profile data, my Tasks) -> Use Site
+- Logout -> DELETE Session -> Route Home
