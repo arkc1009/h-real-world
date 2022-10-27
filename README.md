@@ -63,5 +63,10 @@ NEXTAUTH_SECRET=<시크릿 키>
 ## Flow & API
 - Login -> GET Profile (profile data, my Tasks) -> Use Site
 - Logout -> DELETE Session -> Route Home
+
+### 태스크
 - 일감 클릭 -> 해당 일감의 id를 쿼리 or 파라미터로 쏴줌 -> router로 읽어와서 컨텐츠 표시.
-- 내 작품, 전체 작품 모두 같은 페이지, 같은 컴포넌트를 사용하고, key따라 내 마감물 or 전체 마감물을 props로 내려주면 모두 동작하게끔 해야함!
+- 내 작품, 전체 작품 모두 같은 페이지, 같은 컴포넌트를 사용하고, key따라 내 마감물 or 전체 마감물을 props로 내려주면 모두 동작하게끔 해야함!'
+- 내 작품 필터: 기간, 프론트맨이 나인것만
+- 전체 작품 필터: 기간, 프론트맨이 나인것만, 내가 포함된것만, 특정 사람만 포함된것만
+- 작품 제목으로 검색 가능 하게끔?
