@@ -62,6 +62,10 @@ const SideBar: React.FC = () => {
         path: '/tasks',
         label: '진행중인 작품',
       },
+      {
+        path: '/newTasks',
+        label: '태스크',
+      },
     ],
     []
   );
